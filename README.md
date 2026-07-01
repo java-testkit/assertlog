@@ -1,12 +1,11 @@
 # assertlog
 Unit-tests for your logging
 
-https://github.com/codeborne/assertlog
-
-[![Build Status](https://travis-ci.org/codeborne/assertlog.svg?branch=master)](https://travis-ci.org/codeborne/assertlog)
-[![Maven Central](https://img.shields.io/maven-central/v/com.codeborne/assertlog.svg)](https://search.maven.org/artifact/com.codeborne/assertlog)
-[![MIT License](http://img.shields.io/badge/license-MIT-green.svg)](https://github.com/codeborne/assertlog/blob/master/LICENSE)
+[![Maven Central](https://img.shields.io/maven-central/v/com.codeborne/assertlog.svg)](https://central.sonatype.com/search?q=assertlog&namespace=com.codeborne)
+[![MIT License](http://img.shields.io/badge/license-MIT-green.svg)](https://github.com/selenide/selenide/blob/main/LICENSE)
 ![Free](https://img.shields.io/badge/free-open--source-green.svg)
+![Build Status](https://github.com/java-testkit/assertlog/actions/workflows/test.yml/badge.svg)
+
 
 ## What is AssertLog?
 

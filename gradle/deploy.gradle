@@ -7,7 +7,7 @@ subprojects {
           "Automatic-Module-Name": project.group + '.' + project.name,
           "Implementation-Title": project.group + '.' + project.name,
           "Implementation-Version": archiveVersion,
-          "Implementation-Vendor": "Codeborne")
+          "Implementation-Vendor": "Andrei Solntsev & Codeborne")
     }
   }
 
@@ -54,12 +54,12 @@ subprojects {
             name archivesBaseName
             packaging 'jar'
             description 'AssertLog: Unit-tests for your logging'
-            url 'https://github.com/codeborne/assertlog'
+            url 'https://github.com/java-testkit/assertlog'
 
             scm {
-              url 'scm:git@github.com:codeborne/assertlog.git'
-              connection 'scm:git@github.com:codeborne/assertlog.git'
-              developerConnection 'scm:git@github.com:codeborne/assertlog.git'
+              url 'scm:git@github.com:java-testkit/assertlog.git'
+              connection 'scm:git@github.com:java-testkit/assertlog.git'
+              developerConnection 'scm:git@github.com:java-testkit/assertlog.git'
             }
 
             licenses {
