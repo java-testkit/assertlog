@@ -1,77 +1,49 @@
 subprojects {
-  apply plugin: 'maven-publish'
+  apply plugin: "com.vanniktech.maven.publish"
 
-  jar {
-    from sourceSets.main.allSource
+  ext {
+    groupId = 'com.codeborne.assertlog'
+  }
 
+  tasks.withType(Jar).configureEach {
     manifest {
       attributes(
-          "Automatic-Module-Name": project.group + '.' + project.name,
-          "Implementation-Title": project.group + '.' + project.name,
+          "Automatic-Module-Name": project.groupId + '.' + project.name,
+          "Implementation-Title": project.groupId + '.' + project.name,
           "Implementation-Version": archiveVersion,
           "Implementation-Vendor": "Andrei Solntsev & Codeborne")
     }
   }
 
-  java {
-    withSourcesJar()
-    withJavadocJar()
-  }
-
-  publishing {
-    publications {
-      mavenJava(MavenPublication) {
-        from components.java
-
-        pom {
-          name = project.name
-          packaging = 'jar'
-          description = 'AssertLog: Unit-tests for your logging'
-          url = 'https://github.com/java-testkit/assertlog'
-
-          scm {
-            url = 'scm:git@github.com:java-testkit/assertlog.git'
-            connection = 'scm:git@github.com:java-testkit/assertlog.git'
-            developerConnection = 'scm:git@github.com:java-testkit/assertlog.git'
-          }
-
-          licenses {
-            license {
-              name = 'MIT'
-              url = 'https://opensource.org/licenses/MIT'
-              distribution = 'repo'
-            }
-          }
-
-          developers {
-            developer {
-              id = 'asolntsev'
-              name = 'Andrei Solntsev'
-            }
-          }
-        }
-      }
+  mavenPublishing {
+    if (project.hasProperty("signing.keyId")) {
+      publishToMavenCentral(true)
+      signAllPublications()
     }
 
-    repositories {
-      maven {
-        url = version.endsWith('-SNAPSHOT') ?
-            'https://oss.sonatype.org/content/repositories/snapshots/' :
-            'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-
-        credentials {
-          username = findProperty('sonatypeUsername') ?: ''
-          password = findProperty('sonatypePassword') ?: ''
+    coordinates(project.groupId, project.name, project.version)
+    pom {
+      name = project.name
+      description = 'AssertLog: Unit-tests for your logging'
+      url = 'https://github.com/java-testkit/assertlog'
+      inceptionYear = '2019'
+      licenses {
+        license {
+          name = 'MIT'
+          url = 'https://opensource.org/licenses/MIT'
         }
       }
-    }
-  }
-
-  if (project.hasProperty("signing.keyId")) {
-    apply plugin: 'signing'
-
-    signing {
-      sign publishing.publications.mavenJava
+      developers {
+        developer {
+          id = 'asolntsev'
+          name = 'Andrei Solntsev'
+        }
+      }
+      scm {
+        connection = 'scm:git@github.com:java-testkit/assertlog.git'
+        developerConnection = 'scm:git@github.com:java-testkit/assertlog.git'
+        url = 'https://github.com/java-testkit/assertlog'
+      }
     }
   }
 }
