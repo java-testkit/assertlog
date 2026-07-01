@@ -1,24 +1,27 @@
 subprojects {
   apply plugin: 'java'
-  apply plugin: 'maven'
 
-  group 'com.codeborne.assertlog'
-  version '0.2-SNAPSHOT'
+  group = 'com.codeborne.assertlog'
+  version = '0.2-SNAPSHOT'
 
-  sourceCompatibility = 1.8
-  targetCompatibility = 1.8
+  java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+  }
 
-  [compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
-  [compileJava, compileTestJava]*.options.collect {options -> options.debug = true}
+  tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.debug = true
+  }
   compileJava.options.debugOptions.debugLevel = "source,lines,vars"
 
   repositories {
     mavenCentral()
   }
 
-  tasks.withType(Test).all { testTask ->
-    testTask.jvmArgs += ['-ea', '-Dfile.encoding=UTF-8']
-    testTask.testLogging {exceptionFormat = 'full'}
+  tasks.withType(Test).configureEach { testTask ->
+    testTask.jvmArgs '-ea', '-Dfile.encoding=UTF-8'
+    testTask.testLogging { exceptionFormat = 'full' }
   }
 
   test {
